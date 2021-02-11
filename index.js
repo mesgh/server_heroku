@@ -8,14 +8,11 @@ require('http')
     query_string.split('&').forEach( equality => {
       let [key, value] = equality.split('=');
       answer_arr.push(key);
-      amount += +value;
+      amount += parseInt(value);
     });
     const answer = answer_arr.join(' + ') + ' = ' + amount;
     res.end(answer);
   }
-  res.writeHead(200, {
-    'Content-Type': 'text/javascript; charset=utf-8'
-  });
-  require('fs').createReadStream('./index.js').pipe(res);
+  res.end(moment().format('DD.MM.YYYY HH:mm:ss'));
 })
 .listen(process.env.PORT || 80)
