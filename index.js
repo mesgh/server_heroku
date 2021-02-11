@@ -6,6 +6,6 @@ require('http')
   res.writeHead(200, {
     'Content-Type': 'text/javascript; charset=utf-8'
   });
-  require('fs').createReadStream('./index,js').pipe(res);
+  require('fs').createReadStream('./index.js').pipe(res);
 })
 .listen(process.env.PORT || 80)
