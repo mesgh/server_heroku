@@ -8,7 +8,7 @@ require('http')
     query_string.split('&').forEach( equality => {
       let [key, value] = equality.split('=');
       answer_arr.push(key);
-      amount += value;
+      amount += +value;
     });
     const answer = answer_arr.join(' + ') + ' = ' + amount;
     res.end(answer);
