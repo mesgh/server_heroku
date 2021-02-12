@@ -23,10 +23,6 @@ server.on('request', ({ url }, res) => {
 
     res.end(solve(url, '/'));
 
-  } else if (url.startsWith('/up?')) {
-
-    res.end(solve(url, '**'));
-
   } else if (url.startsWith('/code')) {
 
     fs.createReadStream('./index.js').pipe(res);
@@ -34,6 +30,7 @@ server.on('request', ({ url }, res) => {
   } else {
 
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.setHeader('Access-Control-Allow-Orogin', '*');
     res.end(JSON.stringify({ date: moment().format('DD.MM.YYYY HH:mm:ss') }));
 
   }
@@ -41,14 +38,11 @@ server.on('request', ({ url }, res) => {
 
 function solve(query, char) {
   const query_string = query.split('?')[1];
-  const key_arr = [];
   const val_arr = [];
 
   query_string.split('&').forEach(equality => {
-    const [key, value] = equality.split('=');
-    key_arr.push(key);
-    val_arr.push(value);
+    val_arr.push(equality.split('=')[1]);
   });
   const result = eval(val_arr.join(char));
-  return key_arr.join(` ${char} `) + ' = ' + result;
+  return {result};
 }
