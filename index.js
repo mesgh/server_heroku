@@ -6,6 +6,8 @@ const fs = require('fs');
 server.listen(process.env.PORT || 80);
 
 server.on('request', ({ url }, res) => {
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.setHeader('Access-Control-Allow-Orogin', '*');
 
   if (url.startsWith('/add?')) {
 
@@ -29,8 +31,6 @@ server.on('request', ({ url }, res) => {
 
   } else {
 
-    res.setHeader('Content-Type', 'application/json; charset=utf-8');
-    res.setHeader('Access-Control-Allow-Orogin', '*');
     res.end(JSON.stringify({ date: moment().format('DD.MM.YYYY HH:mm:ss') }));
 
   }
@@ -44,5 +44,5 @@ function solve(query, char) {
     val_arr.push(equality.split('=')[1]);
   });
   const result = eval(val_arr.join(char));
-  return {result};
+  return JSON.stringify({result});
 }
