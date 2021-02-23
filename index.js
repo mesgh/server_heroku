@@ -6,6 +6,8 @@ const fs = require('fs');
 server.listen(process.env.PORT || 80);
 
 server.on('request', ({ url }, res) => {
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.setHeader('Access-Control-Allow-Origin', '*');
 
   if (url.startsWith('/add?')) {
 
@@ -33,7 +35,6 @@ server.on('request', ({ url }, res) => {
 
   } else {
 
-    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     res.end(JSON.stringify({ date: moment().format('DD.MM.YYYY HH:mm:ss') }));
 
   }
@@ -50,5 +51,5 @@ function solve(query, char) {
     val_arr.push(value);
   });
   const result = eval(val_arr.join(char));
-  return key_arr.join(` ${char} `) + ' = ' + result;
+  return JSON.stringify({ result });
 }
