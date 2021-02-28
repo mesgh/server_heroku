@@ -44,5 +44,8 @@ function solve(query, char) {
     val_arr.push(equality.split('=')[1]);
   });
   const result = eval(val_arr.join(char));
+  if (isNaN(result)) {
+    result = 'error';
+  }
   return JSON.stringify({ result });
 }
