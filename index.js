@@ -43,7 +43,7 @@ function solve(query, char) {
   query_string.split('&').forEach(equality => {
     val_arr.push(equality.split('=')[1]);
   });
-  const result = eval(val_arr.join(char));
+  let result = eval(val_arr.join(char));
   if (isNaN(result)) {
     result = 'error';
   }
