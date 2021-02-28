@@ -46,6 +46,8 @@ function solve(query, char) {
   let result = eval(val_arr.join(char));
   if (isNaN(result)) {
     result = 'error';
+  } else {
+    result = result.toString();
   }
   return JSON.stringify({ result });
 }
